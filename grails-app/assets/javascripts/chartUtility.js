@@ -26,3 +26,14 @@ var getChartData = function () {
         }
     ];
 };
+
+
+var createSvg = function (width, height) {
+    var svg = d3.select("#chartArea").append("svg")
+        .attr('id', 'visualisation')
+        .attr("width", width)
+        .attr("height", height)
+        .style('background', '#ACBF70');
+
+    return svg;
+};
