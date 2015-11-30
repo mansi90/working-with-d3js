@@ -1,4 +1,4 @@
-var drawLineChart = function(){
+var drawLineChart = function () {
 
     //Step 1 : Fetch Data
     var lineData = getLineData();
@@ -21,9 +21,10 @@ var drawLineChart = function(){
             return d.y;
         })]);
 
-    var xAxis = d3.svg.axis().scale(xScale).orient("bottom"), yAxis = d3.svg.axis().scale(yScale).orient('left');
+    var xAxis = d3.svg.axis().scale(xScale),
+        yAxis = d3.svg.axis().scale(yScale).orient('left'); // axis it needs to be oriented to the left
 
-    //Step 4 : Apply these axes on svg
+    //Step 4 :  Append both the axis to the SVG and apply the transformation
     svg.append('g')  //g element is used to group SVG shapes together
         .attr('class', 'x axis')
         .attr('transform', 'translate(0,' + (height - margin.top) + ')')//The transforms are SVG transforms, check http://www.w3.org/TR/SVG/coords.html#TransformAttribute
@@ -34,9 +35,10 @@ var drawLineChart = function(){
         .attr('transform', 'translate(' + (margin.left) + ',0)')
         .call(yAxis);
 
+    //We have transformed both the axes, keeping the defined margins in view so that the axes don’t touch the SVG margins.
 };
 
-var getLineData = function(){
+var getLineData = function () {
     return [
         {
             x: 1,
