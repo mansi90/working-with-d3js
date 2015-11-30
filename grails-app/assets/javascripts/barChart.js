@@ -41,7 +41,7 @@ var drawBarChart = function () {
         .call(yAxis);
 
 
-    // Step 5
+    // Step 5 Create rectangular bars for the chart data
     vis.selectAll('rect')
         .data(barData)
         .enter()
