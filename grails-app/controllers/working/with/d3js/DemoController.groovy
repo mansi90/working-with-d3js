@@ -11,4 +11,6 @@ class DemoController {
     def bindDataToDOMElements() {}
 
     def lineChart() {}
+
+    def barChart() {}
 }
