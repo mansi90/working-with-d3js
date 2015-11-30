@@ -4,5 +4,9 @@ class DemoController {
 
     def index() {}
 
-    def firstExample() {}
+    def addADOMElement() {
+
+    }
+
+    def bindDataToDOMElements() {}
 }
