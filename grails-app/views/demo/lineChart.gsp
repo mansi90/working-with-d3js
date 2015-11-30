@@ -3,8 +3,9 @@
 <head>
     <title></title>
     <asset:javascript src="jquery-1.11.1.min.js"/>
-    <asset:javascript src="lineChart.js"/>
     <asset:javascript src="d3.min.js"/>
+    <asset:javascript src="chartUtility.js"/>
+    <asset:javascript src="lineChart.js"/>
     <script type="text/javascript">
         $(document).ready(function () {
             drawLineChart();

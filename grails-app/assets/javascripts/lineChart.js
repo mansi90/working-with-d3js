@@ -1,7 +1,7 @@
 function drawLineChart() {
 
     //Step 1 : Fetch Data
-    var lineData = getLineData();
+    var lineData = getChartData();
 
     // Step 2 : Add SVG
     var margin = {top: 50, right: 50, bottom: 50, left: 50}, width = 1000, height = 500;
@@ -57,35 +57,6 @@ function drawLineChart() {
         .attr("stroke-width", 1)
         .attr("fill", "none");
 
-};
-
-var getLineData = function () {
-    return [
-        {
-            x: 1,
-            y: 15
-        },
-        {
-            x: 20,
-            y: 90
-        },
-        {
-            x: 40,
-            y: 23
-        },
-        {
-            x: 60,
-            y: 48
-        },
-        {
-            x: 80,
-            y: 5
-        },
-        {
-            x: 100,
-            y: 72
-        }
-    ];
 };
 
 var createSvg = function (width, height) {
