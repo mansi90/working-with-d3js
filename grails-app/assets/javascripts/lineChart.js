@@ -52,9 +52,6 @@ function drawLineChart() {
         .attr("x", "-16em")
         .text("Price ($)");
 
-    //The translate() function takes one or two values which specify the horizontal and vertical translation values, respectively.
-    // tx represents the translation value along the x-axis; ty represents the translation value along the y-axis.
-
     //We have transformed both the axes, keeping the defined margins in view so that the axes don’t touch the SVG margins.
 
     // Step 5 : Plot coordinates and draw a line.
@@ -69,7 +66,14 @@ function drawLineChart() {
     vis.append("path")          //SVG Paths represent the outline of a shape that can be stroked, filled, used as a clipping path, or any combination of all three. We can draw rectangles, circles, ellipses, polylines, polygons, straight lines, and curves through path
         .attr("d", lineFunc(lineData))
         .attr("stroke", '#00688B')
-        .attr("stroke-width", 1)
-        .attr("fill", "none");
-
+        .attr("stroke-width", 3)
+        .attr("fill", "none")
+        .on('mouseover', function (d) {
+            d3.select(this)
+                .attr('stroke', 'grey');
+        })
+        .on('mouseout', function (d) {
+            d3.select(this)
+                .attr('stroke', '#00688B');
+        });
 };
