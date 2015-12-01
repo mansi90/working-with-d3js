@@ -4,7 +4,7 @@ function drawLineChart() {
     var lineData = getChartData();
 
     // Step 2 : Add SVG
-    var margin = {top: 100, right: 50, bottom: 100, left: 100}, width = 1000, height = 500;
+    var margin = {top: 100, right: 100, bottom: 100, left: 100}, width = 1000, height = 500;
     createSvg(width, height);
 
 
@@ -34,22 +34,22 @@ function drawLineChart() {
     vis.append("g")             //g element is used to group SVG shapes together
         .attr("class", "x-axis")
         .attr("transform", "translate(0," + (height - margin.bottom) + ")") //The transforms are SVG transforms, check http://www.w3.org/TR/SVG/coords.html#TransformAttribute
-        .call(xAxis)
-        .append("text")
+        .call(xAxis);
+       /* .append("text")
         .attr("y", '3em')
         .attr("x", "30em")
-        .text("Quantity");
+        .text("Quantity");*/
 
     vis.append("g")
         .attr("class", "y-axis")
         .attr("transform", "translate(" + (margin.left) + ",0)")
-        .call(yAxis)
-        .append("text")
+        .call(yAxis);
+        /*.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", "-3em")
         .attr("x", "-13em")
         .style("text-anchor", "end")
-        .text("Price ($)");
+        .text("Price ($)");*/
     //We have transformed both the axes, keeping the defined margins in view so that the axes don’t touch the SVG margins.
 
     // Step 5 : Plot coordinates and draw a line.
