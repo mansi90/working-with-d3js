@@ -12,18 +12,18 @@ function drawLineChart() {
     var vis = d3.select("#visualisation"),
 
         xRange = d3.scale.linear().range([margin.left, width - margin.right]).domain([d3.min(lineData, function (d) {
-            return d.x;
+            return d.quantity;
         }),
             d3.max(lineData, function (d) {
-                return d.x;
+                return d.quantity;
             })
         ]),
 
         yRange = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([d3.min(lineData, function (d) {
-            return d.y;
+            return d.price;
         }),
             d3.max(lineData, function (d) {
-                return d.y;
+                return d.price;
             })
         ]),
 
@@ -45,10 +45,10 @@ function drawLineChart() {
     // Step 5 : Plot coordinates and draw a line.
     var lineFunc = d3.svg.line()
         .x(function (d) {
-            return xRange(d.x);
+            return xRange(d.quantity);
         })
         .y(function (d) {
-            return yRange(d.y);
+            return yRange(d.price);
         });
 
     vis.append("path")          //SVG Paths represent the outline of a shape that can be stroked, filled, used as a clipping path, or any combination of all three. We can draw rectangles, circles, ellipses, polylines, polygons, straight lines, and curves through path

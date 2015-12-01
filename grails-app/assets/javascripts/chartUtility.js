@@ -1,32 +1,32 @@
 var getChartData = function () {
     return [
         {
-            x: 1,
-            y: 45
+            quantity: 1,
+            price: 45
         },
         {
-            x: 5,
-            y: 15
+            quantity: 5,
+            price: 15
         },
         {
-            x: 20,
-            y: 90
+            quantity: 20,
+            price: 90
         },
         {
-            x: 40,
-            y: 23
+            quantity: 40,
+            price: 23
         },
         {
-            x: 60,
-            y: 48
+            quantity: 60,
+            price: 48
         },
         {
-            x: 80,
-            y: 5
+            quantity: 80,
+            price: 5
         },
         {
-            x: 100,
-            y: 72
+            quantity: 100,
+            price: 72
         }
     ];
 };
