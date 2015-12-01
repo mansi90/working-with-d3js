@@ -3,7 +3,8 @@ var getChartData = function () {
         {
             x: 1,
             y: 45
-        }, {
+        },
+        {
             x: 5,
             y: 15
         },
@@ -36,7 +37,7 @@ var createSvg = function (width, height) {
         .attr('id', 'visualisation')
         .attr("width", width)
         .attr("height", height)
-        .style('background', '#ACBF70');
+        .style('border', '1px solid #ccc');
 
     return svg;
 };

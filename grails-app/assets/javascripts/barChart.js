@@ -51,7 +51,7 @@ var drawBarChart = function () {
         .attr('fill', 'grey')   // fills the bar with grey color
         .on('mouseover', function (d) {
             d3.select(this)
-                .attr('fill', 'blue');
+                .attr('fill', '#39B7CD');
         })
         .on('mouseout', function (d) {
             d3.select(this)
