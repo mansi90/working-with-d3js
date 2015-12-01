@@ -11,21 +11,22 @@ function drawLineChart() {
     // Step 3 : Define scale and axes
     var vis = d3.select("#visualisation"),
 
-        xRange = d3.scale.linear().range([margin.left, width - margin.right]).domain([d3.min(lineData, function (d) {
+        xMin = d3.min(lineData, function (d) {
             return d.quantity;
         }),
-            d3.max(lineData, function (d) {
-                return d.quantity;
-            })
-        ]),
+        xMax = d3.max(lineData, function (d) {
+            return d.quantity;
+        }),
 
-        yRange = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([d3.min(lineData, function (d) {
+        yMin = d3.min(lineData, function (d) {
             return d.price;
         }),
-            d3.max(lineData, function (d) {
-                return d.price;
-            })
-        ]),
+        yMax = d3.max(lineData, function (d) {
+            return d.price;
+        }),
+
+        xRange = d3.scale.linear().range([margin.left, width - margin.right]).domain([xMin, xMax ]),
+        yRange = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([yMin, yMax ]),
 
         xAxis = d3.svg.axis().scale(xRange),
         yAxis = d3.svg.axis().scale(yRange).orient('left'); // y-axis it needs to be oriented to the left
@@ -35,21 +36,21 @@ function drawLineChart() {
         .attr("class", "x-axis")
         .attr("transform", "translate(0," + (height - margin.bottom) + ")") //The transforms are SVG transforms, check http://www.w3.org/TR/SVG/coords.html#TransformAttribute
         .call(xAxis);
-       /* .append("text")
-        .attr("y", '3em')
-        .attr("x", "30em")
-        .text("Quantity");*/
+    /* .append("text")
+     .attr("y", '3em')
+     .attr("x", "30em")
+     .text("Quantity");*/
 
     vis.append("g")
         .attr("class", "y-axis")
         .attr("transform", "translate(" + (margin.left) + ",0)")
         .call(yAxis);
-        /*.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", "-3em")
-        .attr("x", "-13em")
-        .style("text-anchor", "end")
-        .text("Price ($)");*/
+    /*.append("text")
+     .attr("transform", "rotate(-90)")
+     .attr("y", "-3em")
+     .attr("x", "-13em")
+     .style("text-anchor", "end")
+     .text("Price ($)");*/
     //We have transformed both the axes, keeping the defined margins in view so that the axes don’t touch the SVG margins.
 
     // Step 5 : Plot coordinates and draw a line.
