@@ -11,6 +11,20 @@
             drawBarChart();
         })
     </script>
+    <style>
+
+    .axis {
+        font: 10px sans-serif;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+
+    </style>
 </head>
 
 <body>
