@@ -11,25 +11,25 @@ function drawLineChart() {
     // Step 3 : Define scale and axes
     var vis = d3.select("#visualisation"),
 
-        xMin = d3.min(lineData, function (d) {
-            return d.quantity;
-        }),
-        xMax = d3.max(lineData, function (d) {
-            return d.quantity;
-        }),
+        xScale = d3.scale.linear().range([margin.left, width - margin.right]).domain([
+            d3.min(lineData, function (d) {
+                return d.quantity;
+            }),
+            d3.max(lineData, function (d) {
+                return d.quantity;
+            })
+        ]),
+        yScale = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([
+            d3.min(lineData, function (d) {
+                return d.price;
+            }),
+            d3.max(lineData, function (d) {
+                return d.price;
+            })
+        ]),
 
-        yMin = d3.min(lineData, function (d) {
-            return d.price;
-        }),
-        yMax = d3.max(lineData, function (d) {
-            return d.price;
-        }),
-
-        xRange = d3.scale.linear().range([margin.left, width - margin.right]).domain([xMin, xMax ]),
-        yRange = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([yMin, yMax ]),
-
-        xAxis = d3.svg.axis().scale(xRange),
-        yAxis = d3.svg.axis().scale(yRange).orient('left'); // y-axis it needs to be oriented to the left
+        xAxis = d3.svg.axis().scale(xScale),
+        yAxis = d3.svg.axis().scale(yScale).orient('left'); // y-axis it needs to be oriented to the left
 
     //Step 4 :  Append both the axis to the SVG and apply the transformation
 //    console.log(typeof(xAxis));
@@ -51,7 +51,6 @@ function drawLineChart() {
         .attr("y", "-3em")
         .attr("x", "-16em")
         .text("Price ($)");
-
     //We have transformed both the axes, keeping the defined margins in view so that the axes don’t touch the SVG margins.
 
     // Step 5 : Plot coordinates and draw a line.
