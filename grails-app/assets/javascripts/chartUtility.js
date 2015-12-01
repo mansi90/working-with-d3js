@@ -2,6 +2,9 @@ var getChartData = function () {
     return [
         {
             x: 1,
+            y: 45
+        }, {
+            x: 5,
             y: 15
         },
         {
