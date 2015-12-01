@@ -3,7 +3,7 @@ var drawBarChart = function () {
     var barData = getChartData();
 
     // Step 2 : Add SVG
-    var margin = {top: 50, right: 50, bottom: 50, left: 50}, width = 1000, height = 500;
+    var margin = {top: 100, right: 100, bottom: 100, left: 100}, width = 1000, height = 500;
     createSvg(width, height);
 
     // Step 3 : Define scale and axes
@@ -26,12 +26,22 @@ var drawBarChart = function () {
     vis.append('g')
         .attr('class', 'x axis')
         .attr('transform', 'translate(0,' + (height - margin.bottom) + ')')
-        .call(xAxis);
+        .call(xAxis)
+        .append("text")
+        .attr("y", '3em')
+        .attr("x", "30em")
+        .text("Quantity");
 
     vis.append('g')
         .attr('class', 'y axis')
         .attr('transform', 'translate(' + (margin.left) + ',0)')
-        .call(yAxis);
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", "-3em")
+        .attr("x", "-13em")
+        .style("text-anchor", "end")
+        .text("Price ($)");
 
     // Step 5 Create rectangular bars for the chart data
     vis.selectAll('rect')

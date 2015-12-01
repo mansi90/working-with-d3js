@@ -37,23 +37,15 @@ function drawLineChart() {
         .attr("class", "x-axis")
         .attr("transform", "translate(0," + (height - margin.bottom) + ")") //The transforms are SVG transforms, check http://www.w3.org/TR/SVG/coords.html#TransformAttribute
         .call(xAxis); //  When you use "call" on a selection you are calling the function passed in (xAxis) on the elements (g) of the selection.
-    /* .append("text")
-     .attr("y", '3em')
-     .attr("x", "30em")
-     .text("Quantity");*/
 
     vis.append("g")   //We create an SVG Group Element to hold all the elements that the axis function produces.
         .attr("class", "y-axis")
         .attr("transform", "translate(" + (margin.left) + ",0)")
         .call(yAxis);
-    /*.append("text")
-     .attr("transform", "rotate(-90)")
-     .attr("y", "-3em")
-     .attr("x", "-13em")
-     .style("text-anchor", "end")
-     .text("Price ($)");*/
+
     //The translate() function takes one or two values which specify the horizontal and vertical translation values, respectively.
     // tx represents the translation value along the x-axis; ty represents the translation value along the y-axis.
+
     //We have transformed both the axes, keeping the defined margins in view so that the axes don’t touch the SVG margins.
 
     // Step 5 : Plot coordinates and draw a line.
