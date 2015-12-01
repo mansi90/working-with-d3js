@@ -36,7 +36,7 @@ var drawBarChart = function () {
     // Step 5 Create rectangular bars for the chart data
     vis.selectAll('rect')
         .data(barData)
-        .enter()
+        .enter()// We handle these three states(enter, update, exit) without any branching (if) or iteration (for). Instead you describe how elements should correspond to data.
         .append('rect')
         .attr('x', function (d) { // sets the x position of the bar
             return xRange(d.x);
