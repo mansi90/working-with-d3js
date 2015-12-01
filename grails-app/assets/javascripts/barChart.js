@@ -48,14 +48,14 @@ var drawBarChart = function () {
         .attr('height', function (d) {  // sets the height of bar
             return ((height - margin.bottom) - yRange(d.price));
         })
-        .attr('fill', 'grey')   // fills the bar with grey color
+        .attr('fill', '#87CEEB')   // fills the bar with grey color
         .on('mouseover', function (d) {
             d3.select(this)
-                .attr('fill', '#39B7CD');
+                .attr('fill', '#00688B');
         })
         .on('mouseout', function (d) {
             d3.select(this)
-                .attr('fill', 'grey');
+                .attr('fill', '#87CEEB');
         });
 
 };

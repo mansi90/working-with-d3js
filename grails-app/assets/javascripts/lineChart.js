@@ -64,7 +64,7 @@ function drawLineChart() {
 
     vis.append("path")          //SVG Paths represent the outline of a shape that can be stroked, filled, used as a clipping path, or any combination of all three. We can draw rectangles, circles, ellipses, polylines, polygons, straight lines, and curves through path
         .attr("d", lineFunc(lineData))
-        .attr("stroke", "blue")
+        .attr("stroke", '#00688B')
         .attr("stroke-width", 1)
         .attr("fill", "none");
 
