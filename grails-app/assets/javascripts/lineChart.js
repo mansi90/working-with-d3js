@@ -27,6 +27,9 @@ function drawLineChart() {
         .attr("y", '3em')
         .attr("x", "30em")
         .text("Quantity");
+    // The translate() function takes one or two values which specify the horizontal and vertical translation values, respectively.
+    // tx represents the translation value along the x-axis;
+    // ty represents the translation value along the y-axis.
 
     mySVG.append("g")   //We create an SVG Group Element to hold all the elements that the axis function produces.
         .attr("class", "y-axis")
