@@ -33,9 +33,8 @@ function drawLineChart() {
         .attr("transform", "translate(" + (margin.left) + ",0)")
         .call(yAxis)
         .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", "-3em")
-        .attr("x", "-16em")
+        .attr("y", "16em")
+        .attr("x", "-5.5em")
         .text("Price ($)");
     //We have transformed both the axes, keeping the defined margins in view so that the axes don’t touch the SVG margins.
 
