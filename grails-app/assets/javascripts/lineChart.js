@@ -88,7 +88,7 @@ var applyTooltips = function (svg, lineData, xScale, yScale) {
     var tooltipDiv = addTooltipDiv();
 
     // Add the scatterplot
-    svg.selectAll("dot")
+    svg.selectAll("circle")
         .data(lineData)
         .enter().append("circle")
         .style("fill", '#00688B')
