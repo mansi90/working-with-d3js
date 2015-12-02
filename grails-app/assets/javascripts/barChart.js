@@ -14,7 +14,7 @@ var drawBarChart = function () {
         })),
 
 
-        yRange = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([0, 80]),
+        yRange = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([0, 100]),
 
         xAxis = d3.svg.axis().scale(xRange), yAxis = d3.svg.axis().scale(yRange).orient("left");
 

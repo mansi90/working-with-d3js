@@ -11,8 +11,8 @@ function drawLineChart() {
     // Step 3 : Define scale and axes
     var vis = d3.select("#visualisation"),
 
-        xScale = d3.scale.linear().range([margin.left, width - margin.right]).domain([1, 100 ]),
-        yScale = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([5, 72]),
+        xScale = d3.scale.linear().range([margin.left, width - margin.right]).domain([0, 100 ]),
+        yScale = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([0, 100]),
 
         xAxis = d3.svg.axis().scale(xScale),
         yAxis = d3.svg.axis().scale(yScale).orient('left'); // y-axis it needs to be oriented to the left
@@ -48,17 +48,45 @@ function drawLineChart() {
             return yScale(d.price);
         });
 
+    // Define the div for the tooltip
+    var tooltipDiv = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
     vis.append("path")          //SVG Paths represent the outline of a shape that can be stroked, filled, used as a clipping path, or any combination of all three. We can draw rectangles, circles, ellipses, polylines, polygons, straight lines, and curves through path
         .attr("d", lineFunc(lineData))
-        .attr("stroke", '#00688B')
+        .attr("stroke", '#87CEEB')
         .attr("stroke-width", 3)
-        .attr("fill", "none")
-        .on('mouseover', function (d) {
-            d3.select(this)
-                .attr('stroke', 'grey');
+        .attr("fill", "none");
+
+    applyTooltips(vis, lineData, tooltipDiv, xScale, yScale);
+};
+
+var applyTooltips = function (svg, lineData, tooltipDiv, xScale, yScale) {
+    // Add the scatterplot
+    svg.selectAll("dot")
+        .data(lineData)
+        .enter().append("circle")
+        .style("fill", '#00688B')
+        .attr("r", 5)
+        .attr("cx", function (d) {
+            return xScale(d.quantity);
         })
-        .on('mouseout', function (d) {
-            d3.select(this)
-                .attr('stroke', '#00688B');
+        .attr("cy", function (d) {
+            return yScale(d.price);
+        })
+        .on("mouseover", function (d) {
+            tooltipDiv.transition()
+                .duration(200)
+                .style("opacity", .9);
+            tooltipDiv.html("Quantity : " + d.quantity + "<br/>Price : " + d.price)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function (d) {
+            tooltipDiv.transition()
+                .duration(500)
+                .style("opacity", 0);
         });
+
 };
