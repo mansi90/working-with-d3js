@@ -9,7 +9,7 @@ function drawLineChart() {
 
 
     // Step 3 : Define scale and axes
-    var vis = d3.select("#visualisation"),
+    var mySVG = d3.select("#visualisation"),
 
         xScale = d3.scale.linear().range([margin.left, width - margin.right]).domain([0, 100 ]),
         yScale = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([0, 100]),
@@ -19,7 +19,7 @@ function drawLineChart() {
 
     //Step 4 :  Append both the axis to the SVG and apply the transformation
 //    console.log(typeof(xAxis));
-    vis.append("g")             //g element is used to group SVG shapes together
+    mySVG.append("g")             //g element is used to group SVG shapes together
         .attr("class", "x-axis")
         .attr("transform", "translate(0," + (height - margin.bottom) + ")") //The transforms are SVG transforms
         .call(xAxis) //  When you use "call" on a selection you are calling the function passed in (xAxis) on the elements (g) of the selection.
@@ -28,7 +28,7 @@ function drawLineChart() {
         .attr("x", "30em")
         .text("Quantity");
 
-    vis.append("g")   //We create an SVG Group Element to hold all the elements that the axis function produces.
+    mySVG.append("g")   //We create an SVG Group Element to hold all the elements that the axis function produces.
         .attr("class", "y-axis")
         .attr("transform", "translate(" + (margin.left) + ",0)")
         .call(yAxis)
@@ -40,6 +40,12 @@ function drawLineChart() {
     //We have transformed both the axes, keeping the defined margins in view so that the axes don’t touch the SVG margins.
 
     // Step 5 : Plot coordinates and draw a line.
+    drawLine(mySVG, xScale, yScale, lineData);
+
+    applyTooltips(mySVG, lineData, xScale, yScale);
+};
+
+var drawLine = function (svg, xScale, yScale, lineData) {
     var lineFunc = d3.svg.line()
         .x(function (d) {
             return xScale(d.quantity);
@@ -48,21 +54,25 @@ function drawLineChart() {
             return yScale(d.price);
         });
 
-    // Define the div for the tooltip
-    var tooltipDiv = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
-
-    vis.append("path")          //SVG Paths represent the outline of a shape that can be stroked, filled, used as a clipping path, or any combination of all three. We can draw rectangles, circles, ellipses, polylines, polygons, straight lines, and curves through path
+    svg.append("path")          //SVG Paths represent the outline of a shape that can be stroked, filled, used as a clipping path, or any combination of all three. We can draw rectangles, circles, ellipses, polylines, polygons, straight lines, and curves through path
         .attr("d", lineFunc(lineData))
         .attr("stroke", '#87CEEB')
         .attr("stroke-width", 3)
         .attr("fill", "none");
-
-    applyTooltips(vis, lineData, tooltipDiv, xScale, yScale);
 };
 
-var applyTooltips = function (svg, lineData, tooltipDiv, xScale, yScale) {
+var addTooltipDiv = function () {
+    var tooltipDiv = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    return tooltipDiv;
+};
+
+var applyTooltips = function (svg, lineData, xScale, yScale) {
+    // Define the div for the tooltip
+    var tooltipDiv = addTooltipDiv();
+
     // Add the scatterplot
     svg.selectAll("dot")
         .data(lineData)
