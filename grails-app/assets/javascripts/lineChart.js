@@ -11,22 +11,8 @@ function drawLineChart() {
     // Step 3 : Define scale and axes
     var vis = d3.select("#visualisation"),
 
-        xScale = d3.scale.linear().range([margin.left, width - margin.right]).domain([
-            d3.min(lineData, function (d) {
-                return d.quantity;
-            }),
-            d3.max(lineData, function (d) {
-                return d.quantity;
-            })
-        ]),
-        yScale = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([
-            d3.min(lineData, function (d) {
-                return d.price;
-            }),
-            d3.max(lineData, function (d) {
-                return d.price;
-            })
-        ]),
+        xScale = d3.scale.linear().range([margin.left, width - margin.right]).domain([1, 100 ]),
+        yScale = d3.scale.linear().range([height - margin.top, margin.bottom]).domain([5, 72]),
 
         xAxis = d3.svg.axis().scale(xScale),
         yAxis = d3.svg.axis().scale(yScale).orient('left'); // y-axis it needs to be oriented to the left
@@ -56,10 +42,10 @@ function drawLineChart() {
     // Step 5 : Plot coordinates and draw a line.
     var lineFunc = d3.svg.line()
         .x(function (d) {
-            return xRange(d.quantity);
+            return xScale(d.quantity);
         })
         .y(function (d) {
-            return yRange(d.price);
+            return yScale(d.price);
         });
 
     vis.append("path")          //SVG Paths represent the outline of a shape that can be stroked, filled, used as a clipping path, or any combination of all three. We can draw rectangles, circles, ellipses, polylines, polygons, straight lines, and curves through path
