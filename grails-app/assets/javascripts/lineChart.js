@@ -39,7 +39,9 @@ function drawLineChart() {
     //We have transformed both the axes, keeping the defined margins in view so that the axes don’t touch the SVG margins.
 
     // Step 5 : Plot coordinates and draw a line.
-    drawLine(mySVG, xScale, yScale, lineData);
+    var path = drawLine(mySVG, xScale, yScale, lineData);
+
+    highlightOnMouseHover(path);
 
     applyTooltips(mySVG, lineData, xScale, yScale);
 };
@@ -53,12 +55,25 @@ var drawLine = function (svg, xScale, yScale, lineData) {
             return yScale(d.price);
         });
 
-    svg.append("path")          //SVG Paths represent the outline of a shape that can be stroked, filled, used as a clipping path, or any combination of all three. We can draw rectangles, circles, ellipses, polylines, polygons, straight lines, and curves through path
+    var path = svg.append("path")          //SVG Paths represent the outline of a shape that can be stroked, filled, used as a clipping path, or any combination of all three. We can draw rectangles, circles, ellipses, polylines, polygons, straight lines, and curves through path
         .attr("d", lineFunc(lineData))
         .attr("stroke", '#87CEEB')
         .attr("stroke-width", 3)
         .attr("fill", "none");
+
+    return path;
 };
+
+var highlightOnMouseHover = function (path) {
+    path.on('mouseover', function (d) {
+        d3.select(this)
+            .attr('stroke', '#00688B');
+    })
+        .on('mouseout', function (d) {
+            d3.select(this)
+                .attr('stroke', '#87CEEB');
+        });
+}
 
 var addTooltipDiv = function () {
     var tooltipDiv = d3.select("body").append("div")
