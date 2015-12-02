@@ -9,8 +9,8 @@ var drawBarChart = function () {
     // Step 3 : Define scale and axes
     var vis = d3.select('#visualisation'),
 
-        xRange = d3.scale.ordinal().rangeRoundBands([margin.left, width - margin.right], 0.1).domain(barData.map(function (d) {
-            return d.quantity;
+        xRange = d3.scale.ordinal().rangeRoundBands([margin.left, width - margin.right], 0.1).domain(barData.map(function (obj) {
+            return obj.quantity;
         })),
 
 
@@ -44,22 +44,22 @@ var drawBarChart = function () {
         .data(barData)
         .enter()// We handle these three states(enter, update, exit) without any branching (if) or iteration (for). Instead you describe how elements should correspond to data.
         .append('rect')
-        .attr('x', function (d) { // sets the x position of the bar
-            return xRange(d.quantity);
+        .attr('x', function (obj) { // sets the x position of the bar
+            return xRange(obj.quantity);
         })
-        .attr('y', function (d) { // sets the y position of the bar
-            return yRange(d.price);
+        .attr('y', function (obj) { // sets the y position of the bar
+            return yRange(obj.price);
         })
         .attr('width', xRange.rangeBand()) // sets the width of bar
-        .attr('height', function (d) {  // sets the height of bar
-            return ((height - margin.bottom) - yRange(d.price));
+        .attr('height', function (obj) {  // sets the height of bar
+            return ((height - margin.bottom) - yRange(obj.price));
         })
         .attr('fill', '#87CEEB')   // fills the bar with grey color
-        .on('mouseover', function (d) {
+        .on('mouseover', function (obj) {
             d3.select(this)
                 .attr('fill', '#00688B');
         })
-        .on('mouseout', function (d) {
+        .on('mouseout', function (obj) {
             d3.select(this)
                 .attr('fill', '#87CEEB');
         });

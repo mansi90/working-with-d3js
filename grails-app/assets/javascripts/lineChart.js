@@ -48,11 +48,11 @@ function drawLineChart() {
 
 var drawLine = function (svg, xScale, yScale, lineData) {
     var lineFunc = d3.svg.line()
-        .x(function (d) {
-            return xScale(d.quantity);
+        .x(function (obj) {
+            return xScale(obj.quantity);
         })
-        .y(function (d) {
-            return yScale(d.price);
+        .y(function (obj) {
+            return yScale(obj.price);
         });
 
     var path = svg.append("path")          //SVG Paths represent the outline of a shape that can be stroked, filled, used as a clipping path, or any combination of all three. We can draw rectangles, circles, ellipses, polylines, polygons, straight lines, and curves through path
@@ -65,15 +65,15 @@ var drawLine = function (svg, xScale, yScale, lineData) {
 };
 
 var highlightOnMouseHover = function (path) {
-    path.on('mouseover', function (d) {
+    path.on('mouseover', function (obj) {
         d3.select(this)
             .attr('stroke', '#00688B');
     })
-        .on('mouseout', function (d) {
+        .on('mouseout', function (obj) {
             d3.select(this)
                 .attr('stroke', '#87CEEB');
         });
-}
+};
 
 var addTooltipDiv = function () {
     var tooltipDiv = d3.select("body").append("div")
@@ -93,21 +93,21 @@ var applyTooltips = function (svg, lineData, xScale, yScale) {
         .enter().append("circle")
         .style("fill", '#00688B')
         .attr("r", 5)
-        .attr("cx", function (d) {
-            return xScale(d.quantity);
+        .attr("cx", function (obj) {
+            return xScale(obj.quantity);
         })
-        .attr("cy", function (d) {
-            return yScale(d.price);
+        .attr("cy", function (obj) {
+            return yScale(obj.price);
         })
-        .on("mouseover", function (d) {
+        .on("mouseover", function (obj) {
             tooltipDiv.transition()
                 .duration(200)
                 .style("opacity", .9);
-            tooltipDiv.html("Quantity : " + d.quantity + "<br/>Price : " + d.price)
+            tooltipDiv.html("Quantity : " + obj.quantity + "<br/>Price : " + obj.price)
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
         })
-        .on("mouseout", function (d) {
+        .on("mouseout", function (obj) {
             tooltipDiv.transition()
                 .duration(500)
                 .style("opacity", 0);
